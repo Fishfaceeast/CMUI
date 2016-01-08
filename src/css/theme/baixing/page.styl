@@ -68,7 +68,11 @@ $nav-bar-btn-color-bg-info = #b0bcc4
 		overflow visible
 		border-top-left-radius 7px
 		border-bottom-left-radius 7px
-		background-image none !important	// no gradient
+		border-left none
+		border-right none
+		background-color $color-fg-highlight
+		border-color @background-color
+		color white
 		&::before
 		&::after
 			content ''
@@ -78,9 +82,9 @@ $nav-bar-btn-color-bg-info = #b0bcc4
 			border-width 11px 11px 11px 0
 			height 2px
 		&::before
-			top 3px
+			top 1px
 		&::after
-			top 2px
+			top 1px
 
 -nav-bar-btn($fgColor, $bgColor)
 	$hoverColor = darken($bgColor, 5%)
@@ -91,17 +95,12 @@ $nav-bar-btn-color-bg-info = #b0bcc4
 	.cmNavBar &
 		color $fgColor
 		background-color $bgColor
-		background-image linear-gradient(to bottom, lighten($bgColor, 15%), darken($bgColor, 15%))
-		box-shadow 0 1px 0 0 $shadowColor
-		// Android 2 ignore declaration, if shadow blur set to `0`
-		html.android.legacy &
-			-webkit-box-shadow 0 1px 1px 0 $shadowColor
 
 		&.cmBtnBack
 			&::before
-				border-right-color $shadowColor
+				border-right-color $color-fg-highlight
 			&::after
-				border-right-color $bgColor
+				border-right-color $color-fg-highlight
 
 	// hover
 	html.mouse .cmNavBar .cmBtnWrapper:hover &:not(.disabled)
@@ -119,12 +118,12 @@ $nav-bar-btn-color-bg-info = #b0bcc4
 	html.cmui .cmNavBar .cmBtnWrapper:active &:not(.disabled)
 	.cmNavBar &:active
 		background-color $activeColor
-		background-image linear-gradient(to bottom, darken($bgColor, 45%), darken($bgColor, 15%))
-		box-shadow 0 1px 0 0 $shadowColorActive
 	html.cmui .cmNavBar .cmBtnWrapper:active &.cmBtnBack:not(.disabled)
 	.cmNavBar &.cmBtnBack:active
+		background-color $activeColor
+		border-color @background-color
 		&::before
-			border-right-color $shadowColorActive
+			border-right-color $activeColor
 		&::after
 			border-right-color $activeColor
 
